@@ -1,0 +1,129 @@
+<div style="text-align: center">
+  <form [formGroup]="form">
+    <div>
+      <input placeholder="Shenoni emrin"  formControlName="emriKlientit"/>
+    </div>
+    <div>
+      <div>
+        <input type="radio" name="gjinia" value="M" id="M"  formControlName="gjinia"/>
+        <label for="M">M</label>
+      </div>
+      <div>
+        <input type="radio" name="gjinia" value="F" id="F"  formControlName="gjinia"/>
+        <label for="F">F</label>
+      </div>
+    </div>
+    <div style="padding-bottom: 5px">
+      <input placeholder="Adresa per dorezim"  formControlName="adresa"/>
+    </div>
+    <div style="padding-bottom: 5px">
+      <input placeholder="Mosha" type="number"  formControlName="mosha"/>
+    </div>
+    <div style="padding-bottom: 5px">
+      <input placeholder="Gjatesia (cm)" type="number"  formControlName="gjatesia"/>
+    </div>
+    <div style="padding-bottom: 5px">
+      <input placeholder="Pesha (kg)" type="number"  formControlName="pesha"/>
+    </div>
+    <div style="padding-bottom: 5px">
+      <select formControlName="kohezgjatja">
+        <option value="" selected>Kohezgjatja e planit</option>
+        <option value="1">Plan 1 javorë</option>
+        <option value="2">Plan 1 javorë</option>
+        <option value="3">Plan mujorë</option>
+      </select>
+    </div>
+    <div style="padding-bottom: 5px">
+      <select formControlName="aktiviteti">
+        <option value="" selected>Aktiviteti javorë</option>
+        <option value="1">I ulët: Pak ose aspak</option>
+        <option value="2">Ushtrim të lehtë (1-3 herë në javë)</option>
+        <option value="3">Ushtrim mesatar (4-5 herë në javë)</option>
+        <option value="4">Aktiv: Cdo dite ose ushtrime \n intensive 3-4 herë në javë</option>
+        <option value="5">Ushtrim të rëndë (6-7 herë në javë)</option>
+        <option value="6">Atlet (2 herë në ditë)</option>
+      </select>
+    </div>
+    <label for="Qellimi">Qëllimi im:</label>
+    <div id="qellimi" >
+      <div>
+        <input type="radio" name="qellimi" value="HeqePeshe" id="H" formControlName="qellimi"/>
+        <label for="H">Të humbi peshë</label>
+      </div>
+      <div>
+        <input type="radio" name="qellimi" value="ShtojPeshe" id="S" formControlName="qellimi"/>
+        <label for="S">Të shtoj peshë</label>
+      </div>
+    </div>
+    <div style="padding-bottom: 5px" *ngIf="heqePeshe">
+      <select formControlName="nrShujtave">
+        <option value="" selected>Nr. i shujtave në ditë</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </div>
+    <div style="padding-bottom: 5px" *ngIf="!heqePeshe">
+      <select formControlName="nrShujtave">
+        <option value="" selected>Nr. i shujtave në ditë</option>
+        <option value="1">2</option>
+        <option value="2">3</option>
+        <option value="3">4</option>
+      </select>
+    </div>
+    <div style="padding-bottom: 5px" >
+      <input placeholder="Sasia e peshes qe dua te heq/shtoj (kg)" formControlName="sasia"/>
+    </div>
+    <div style="padding-bottom: 5px">
+      <select formControlName="perkushtimi">
+        <option value="" selected>Sa do të jem i përkushtuar ndaj dietës?</option>
+        <option value="1">Aspak</option>
+        <option value="2">Pak</option>
+        <option value="3">Mesatarisht</option>
+        <option value="4">Mbi mesataren</option>
+        <option value="5">Shumë</option>
+        <option value="6">Plotësisht</option>
+      </select>
+    </div>
+    <div>
+      <label>Plani im nuk dua të përmbaj këto shujta:</label>
+      <div>
+        <input type="checkbox" value="1" id="sh1" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Gjoks pule, Oriz, Brokolli</label>
+        <br />
+        <input type="checkbox" value="2" id="sh2" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Gjoks pule, Oriz, Spanaq, Bizele</label>
+        <br />
+        <input type="checkbox" value="3" id="sh3" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Gjoks pule, Makarona, Karrota, Brokolli</label>
+        <br />
+        <input type="checkbox" value="4" id="sh4" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Biftek, Oriz, Karrota, Brokolli</label>
+        <br />
+        <input type="checkbox" value="5" id="sh5" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Biftek, Makarona, Karrota, Brokolli</label>
+        <br />
+        <input type="checkbox" value="6" id="sh6" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Troftë, Makarona, Brokolli, Karrota</label>
+        <br />
+        <input type="checkbox" value="7" id="sh7" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Troftë, Oriz, Brokolli</label>
+        <br />
+        <input type="checkbox" value="8" id="sh8" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Troftë, Oriz, Spanaq, Bizele</label>
+        <br />
+        <input type="checkbox" value="9" id="sh9" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Gjoks pule, Patate</label>
+        <br />
+        <input type="checkbox" value="10" id="sh10" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Biftek, Patate</label>
+        <br />
+        <input type="checkbox" value="11" id="sh11" (change)="onCheckboxChange($event)"/>
+        <label for="sh1">Gjoks pule, Karrota, Sallatë e gjelbert, Spanaq</label>
+
+      </div>
+    </div>
+
+    <button type="button" (click)="onSubmit()">Submit</button>
+  </form>
+</div>

@@ -25,7 +25,7 @@ namespace NutriPrep.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-RGAU3V4;Initial Catalog=NutriPrep;User ID=erion;Password=sql***;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-RGAU3V4;Initial Catalog=NutriPrep;User ID=erion;Password=sql***");
             }
         }
 
@@ -39,6 +39,10 @@ namespace NutriPrep.Models
                 entity.Property(e => e.ShujtaId).HasColumnName("ShujtaID");
 
                 entity.Property(e => e.EmriShujtes).HasMaxLength(20);
+
+                entity.Property(e => e.Lloji)
+                    .HasMaxLength(10)
+                    .IsFixedLength(true);
             });
 
             modelBuilder.Entity<Ushqimi>(entity =>
