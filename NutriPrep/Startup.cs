@@ -10,8 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NutriPrep.Data;
+using NutriPrep.Interfaces;
 using NutriPrep.Models;
 using NutriPrep.Repositories;
+using NutriPrep.Services;
 
 namespace NutriPrep
 {
@@ -53,6 +55,7 @@ namespace NutriPrep
             });
 
             services.AddTransient<IMealsRepository, MealsRepository>();
+            services.AddTransient<IMealsService, MealsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

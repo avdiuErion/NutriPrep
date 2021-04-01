@@ -9,5 +9,6 @@ namespace NutriPrep
     public interface IMealsRepository
     {
         public List<Ushqimi> GetUshqimet();
+        public List<Ushqimi> GetUshqimetPerEleminimNePlan();
     }
 }

@@ -9,6 +9,7 @@ import { GeneralService } from '../../_services/general.service';
 export class HomeComponent implements OnInit{
   r: any;
   form: FormGroup;
+    plani: any;
   constructor(
     private generalService: GeneralService,
     private formBuilder: FormBuilder,
@@ -40,7 +41,12 @@ export class HomeComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    this.generalService.GetPlan(this.form.value).subscribe(res => {
+      this.plani = res;
+      console.log(this.plani);
+    }, error => {
+      console.log(error);
+    });
   }
 
   onCheckboxChange(e) {
@@ -59,4 +65,6 @@ export class HomeComponent implements OnInit{
       });
     }
   }
+
+  Gjinia() { return this.form.get('gjinia').value; }
 }
