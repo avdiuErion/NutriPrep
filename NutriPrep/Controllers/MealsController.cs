@@ -24,20 +24,20 @@ namespace NutriPrep.Controllers
             _mealsService = mealsService;
         }
 
-        [HttpGet("GetUshqimet")]
-        public IActionResult GetUshqimet()
-        {
-            try
-            {
-                var customerResult = _mealsRepository.GetUshqimet();
+        //[HttpGet("GetUshqimet")]
+        //public IActionResult GetUshqimet()
+        //{
+        //    try
+        //    {
+        //        var customerResult = _mealsRepository.GetUshqimet();
 
-                return Ok(customerResult);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //        return Ok(customerResult);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         [HttpGet("GetUshqimetPerEleminimNePlan")]
         public IActionResult GetUshqimetPerEleminimNePlan()

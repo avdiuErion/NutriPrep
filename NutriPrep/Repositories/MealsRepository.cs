@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MoreLinq;
-using NutriPrep.Data;
 using NutriPrep.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace NutriPrep.Repositories
 {
@@ -20,41 +17,21 @@ namespace NutriPrep.Repositories
             _context = context;
         }
 
-        public List<Ushqimi> GetUshqimet()
+        public List<Ushqimi> GetUshqimetMengjes(int mengjes, int nrMengjes)
         {
-            var rand = new Random();
-            var count = 0;
             var ushqimetB = new List<Ushqimi>();
-            var ushqimetL = new List<Ushqimi>();
-            var ushqimetD = new List<Ushqimi>();
-            var ushqimet = new List<Ushqimi>();
-            while (count < 7)
-            {
-                var shujtaRand = rand.Next(10, 12);
+            var shujtaId = _context.Shujta.Where(x => x.ShujtaRandomInt == nrMengjes
+                && mengjes >= x.Kalori && mengjes < (x.Kalori + 19)).FirstOrDefault().ShujtaId;
+            ushqimetB = _context.Ushqimis.Where(x => x.ShujtaId == shujtaId).ToList();
 
-                ushqimetB = _context.Ushqimis.Where(x => x.Shujta.ShujtaRandomInt == shujtaRand 
-                && (x.Shujta.Kalori + 19) < 580 && x.Shujta.Kalori >= 560).ToList();
-                //ushqimetL = _context.Ushqimis.Where(x => x.Shujta.ShujtaRandomInt == shujtaRand
-                //&& (x.Shujta.Kalori + 19) < 920 && x.Shujta.Kalori >= 900 && x.Shujta.Lloji == "L").ToList();
-                //ushqimetD = _context.Ushqimis.Where(x => x.Shujta.ShujtaRandomInt == shujtaRand
-                //&& (x.Shujta.Kalori + 19) < 700 && x.Shujta.Kalori >= 680 && x.Shujta.Lloji == "D").ToList();
+            return ushqimetB;
+        }
 
-                count++;
-            }
-
-            //foreach (var item in ushqimetB)
-            //{
-            //    ushqimet.Add(item);
-            //}
-            //foreach (var item in ushqimetL)
-            //{
-            //    ushqimet.Add(item);
-            //}
-            //foreach (var item in ushqimetD)
-            //{
-            //    ushqimet.Add(item);
-            //}
-
+        public List<Ushqimi> GetUshqimetDreke(int dreke, int nrDreke)
+        {
+            var ushqimetB = new List<Ushqimi>();
+            ushqimetB = _context.Ushqimis.Where(x => x.Shujta.ShujtaRandomInt == nrDreke
+                && (x.Shujta.Kalori + 19) < dreke && x.Shujta.Kalori >= dreke).ToList();
 
             return ushqimetB;
         }

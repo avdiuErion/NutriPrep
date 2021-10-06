@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div style="text-align: center" id="questionnaire" *ngIf="questionnaire">
   <form [formGroup]="form">
     <div>
       <input placeholder="Shenoni emrin"  formControlName="emriKlientit"/>
@@ -126,4 +126,9 @@
 
     <button type="button" (click)="onSubmit()">Submit</button>
   </form>
+</div>
+
+<div id="pdfTable" *ngIf="!questionnaire">
+  <p *ngFor="let item of plani">{{item.emriUshqimit}}, {{item.sasiaGr}} + "gr"</p>
+  <button (click)="downloadAsPDF()">PDF</button>
 </div>

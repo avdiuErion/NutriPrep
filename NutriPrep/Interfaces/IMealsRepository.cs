@@ -8,7 +8,8 @@ namespace NutriPrep
 {
     public interface IMealsRepository
     {
-        public List<Ushqimi> GetUshqimet();
+        public List<Ushqimi> GetUshqimetMengjes(int mengjes, int nrMengjes);
+        public List<Ushqimi> GetUshqimetDreke(int dreke, int nrDreke);
         public List<Ushqimi> GetUshqimetPerEleminimNePlan();
     }
 }
