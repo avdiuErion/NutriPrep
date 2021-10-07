@@ -10,6 +10,7 @@ namespace NutriPrep
     {
         public List<Ushqimi> GetUshqimetMengjes(int mengjes, int nrMengjes);
         public List<Ushqimi> GetUshqimetDreke(int dreke, int nrDreke);
+        public List<Ushqimi> GetUshqimetDarke(int darke, int nrDarke);
         public List<Ushqimi> GetUshqimetPerEleminimNePlan();
     }
 }

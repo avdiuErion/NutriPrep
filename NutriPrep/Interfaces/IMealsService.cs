@@ -9,6 +9,6 @@ namespace NutriPrep.Interfaces
 {
     public interface IMealsService
     {
-        Task<List<Ushqimi>> GetPlan(PayLoadDTO payload);
+        Task<List<List<Ushqimi>>> GetPlan(PayLoadDTO payload);
     }
 }

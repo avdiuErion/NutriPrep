@@ -8,12 +8,15 @@ import { GeneralService } from '../../_services/general.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
   r: any;
   s: any;
   form: FormGroup;
-  plani: any;
+  breakfasts: any;
+  lunches: any;
+  dinners: any;
   questionnaire: boolean = true;
   constructor(
     private generalService: GeneralService,
@@ -50,9 +53,11 @@ export class HomeComponent implements OnInit{
   onSubmit() {
     this.generalService.GetPlan(this.form.value).subscribe(res => {
       console.log(this.form.value);
-      this.plani = res;
+      this.breakfasts = res[0];
+      this.lunches = res[1];
+      this.dinners = res[2];
       this.questionnaire = false;
-      console.log(this.plani);
+      console.log(this.breakfasts);
     }, error => {
       console.log(error);
     });
@@ -76,13 +81,16 @@ export class HomeComponent implements OnInit{
     //doc.html(pdfTable.innerHTML);
 
     var element = document.getElementById('pdfTable');
-    html2canvas(element).then((canvas) => {
+      html2canvas(element).then((canvas) => {
       var imgData = canvas.toDataURL('image/png');
 
       var doc = new jspdf();
 
       doc.addImage(imgData, 0, 0, 208, 500);
-      doc.save('tableToPdf.pdf');
+      //doc.save('tableToPdf.pdf');
+        /*doc.output('dataurlnewwindow');*/
+        var blob = doc.output("blob");
+        window.open(URL.createObjectURL(blob));
     });
   }
 
