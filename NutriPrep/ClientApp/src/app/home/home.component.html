@@ -128,18 +128,18 @@
   </form>
 </div>
 
-<div class="row" id="pdfTable">
-  <div *ngIf="!questionnaire" class="col-md-4">
-    <h6>Mengjes:</h6>
-    <p *ngFor="let item of breakfasts" class="paragraph">{{item.emriUshqimit}}, {{item.sasiaGr}} gr</p>
+<div class="row" id="pdfTable" [class.hidden]="questionnaire">
+  <div class="col-md-4" *ngFor="let item of uToReturn; index as i">
+    <h6>Dita {{i+1}}:</h6>
+      <p *ngFor="let itemi of item" class="paragraph">{{itemi.emriUshqimit}}, {{itemi.sasiaGr}} gr</p>
   </div>
-  <div id="pdfTable" *ngIf="!questionnaire" class="col-md-4">
+  <!--<div id="pdfTable" *ngIf="!questionnaire" class="col-md-4">
     <h6>Dreke:</h6>
     <p *ngFor="let item of lunches" class="paragraph">{{item.emriUshqimit}}, {{item.sasiaGr}} gr</p>
   </div>
   <div id="pdfTable" *ngIf="!questionnaire" class="col-md-4">
     <h6>Darke:</h6>
     <p *ngFor="let item of dinners" class="paragraph">{{item.emriUshqimit}}, {{item.sasiaGr}} gr</p>
-  </div>
+  </div>-->
 </div>
 <button (click)="downloadAsPDF()">PDF</button>

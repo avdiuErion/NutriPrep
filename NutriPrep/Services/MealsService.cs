@@ -32,10 +32,9 @@ namespace NutriPrep.Services
 
         private List<List<Ushqimi>> getShujtat(PayLoadDTO payload, double rezultatiBRM)
         {
-            List<Ushqimi> breakfastsToReturn = new List<Ushqimi>();
-            List<Ushqimi> lunchesToReturn = new List<Ushqimi>();
-            List<Ushqimi> dinnersToReturn = new List<Ushqimi>();
-            List<List<Ushqimi>> listToReturn = new List<List<Ushqimi>>(new List<Ushqimi>[3]);
+            int koheZgjatja = Convert.ToInt32(payload.Kohezgjatja);
+            int listLength = Convert.ToInt32(payload.Kohezgjatja) == 3 ? (koheZgjatja * 10) : (koheZgjatja * 7);
+            List<List<Ushqimi>> listToReturn = new List<List<Ushqimi>>(new List<Ushqimi>[listLength]);
             var qellimiDietes = payload.Qellimi;
             var mengjes = 0;
             var dreka = 0;
@@ -59,8 +58,9 @@ namespace NutriPrep.Services
                         {
                             while (count < 7)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
 
                                 count++;
                             }
@@ -69,8 +69,9 @@ namespace NutriPrep.Services
                         {
                             while (count < 14)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
 
                                 count++;
                             }
@@ -79,8 +80,9 @@ namespace NutriPrep.Services
                         {
                             while (count < 30)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
 
                                 count++;
                             }
@@ -94,9 +96,10 @@ namespace NutriPrep.Services
                         {
                             while (count < 7)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -105,9 +108,10 @@ namespace NutriPrep.Services
                         {
                             while (count < 14)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -116,9 +120,10 @@ namespace NutriPrep.Services
                         {
                             while (count < 30)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -133,10 +138,11 @@ namespace NutriPrep.Services
                         {
                             while (count < 7)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -145,10 +151,11 @@ namespace NutriPrep.Services
                         {
                             while (count < 14)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -157,10 +164,11 @@ namespace NutriPrep.Services
                         {
                             while (count < 30)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -183,9 +191,10 @@ namespace NutriPrep.Services
                         {
                             while (count < 7)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -194,9 +203,10 @@ namespace NutriPrep.Services
                         {
                             while (count < 14)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -205,9 +215,10 @@ namespace NutriPrep.Services
                         {
                             while (count < 30)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -222,10 +233,11 @@ namespace NutriPrep.Services
                         {
                             while (count < 7)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -234,10 +246,11 @@ namespace NutriPrep.Services
                         {
                             while (count < 14)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -246,10 +259,11 @@ namespace NutriPrep.Services
                         {
                             while (count < 30)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
                                 count++;
                             }
@@ -265,11 +279,12 @@ namespace NutriPrep.Services
                         {
                             while (count < 7)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka2));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka2));
 
                                 count++;
                             }
@@ -278,11 +293,12 @@ namespace NutriPrep.Services
                         {
                             while (count < 14)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka2));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka2));
 
                                 count++;
                             }
@@ -291,11 +307,12 @@ namespace NutriPrep.Services
                         {
                             while (count < 30)
                             {
-                                breakfastsToReturn.AddRange(getShujtaMengjes(mengjes));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka));
-                                lunchesToReturn.AddRange(getShujtaDreke(dreka2));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka));
-                                dinnersToReturn.AddRange(getShujtaDarke(darka2));
+                                listToReturn[count] = new List<Ushqimi>();
+                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                                listToReturn[count].AddRange(getShujtaDarke(darka));
+                                listToReturn[count].AddRange(getShujtaDarke(darka2));
 
                                 count++;
                             }
@@ -304,9 +321,9 @@ namespace NutriPrep.Services
                 }
             }
 
-            listToReturn[0] = breakfastsToReturn;
-            listToReturn[1] = lunchesToReturn;
-            listToReturn[2] = dinnersToReturn;
+            //listToReturn[0] = breakfastsToReturn;
+            //listToReturn[1] = lunchesToReturn;
+            //listToReturn[2] = dinnersToReturn;
 
             return listToReturn;
         }

@@ -1,31 +1,46 @@
-import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
 import jsPDF from 'jspdf';
 import { GeneralService } from '../../_services/general.service';
+import { Breakfast } from '../Breakfast';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, AfterViewInit{
   r: any;
   s: any;
   form: FormGroup;
-  breakfasts: any;
+  breakfasts: Breakfast[] = [];
   lunches: any;
   dinners: any;
   questionnaire: boolean = true;
+    uToReturn: any;
+  ushqimet: any;
+  node: any;
+  pp: any;
   constructor(
     private generalService: GeneralService,
     private formBuilder: FormBuilder,
     private elRef: ElementRef
   ) { }
+    ngAfterViewInit(): void {
+      this.pp = document.getElementsByClassName('paragraph');
+      console.log(this.pp);
+      this.node = document.createElement("P");
+      
+    }
+
 
   ngOnInit(): void {
     console.log(this.questionnaire);
+
+     
+    
 
     this.form = this.formBuilder.group({
       emriKlientit: [''],
@@ -42,6 +57,8 @@ export class HomeComponent implements OnInit{
       perkushtimi: [''],
       checkArray: this.formBuilder.array([])
     });
+
+    //this.giveValuesToForm();
     this.generalService.getUshqimetPerEleminim().subscribe(res => {
       this.r = res;
       console.log(this.r);
@@ -50,14 +67,34 @@ export class HomeComponent implements OnInit{
     });
   }
 
+  giveValuesToForm() {
+    this.form.get('emriKlientit').setValue('Filan');
+    this.form.get('adresa').setValue('jhwebhfwe');
+    this.form.get('mosha').setValue(21);
+    this.form.get('gjatesia').setValue(170);
+    this.form.get('pesha').setValue(65);
+    this.form.get('sasia').setValue(1);
+  }
+
   onSubmit() {
+    
     this.generalService.GetPlan(this.form.value).subscribe(res => {
       console.log(this.form.value);
-      this.breakfasts = res[0];
-      this.lunches = res[1];
-      this.dinners = res[2];
-      this.questionnaire = false;
+      this.uToReturn = res;
+      for (var i = 0; i < this.uToReturn.length; i++) {
+        this.ushqimet = this.uToReturn[i];
+        for (var j = 0; j < this.ushqimet.length - 1; j++) {
+          var u1 = this.ushqimet[j] as Breakfast;
+          var u2 = this.ushqimet[j + 1] as Breakfast;
+          if (u1.shujtaId != u2.shujtaId) {
+            document.appendChild < this.pp > (this.node);
+          }
+        }
+      }
+      
+      console.log(this.uToReturn);
       console.log(this.breakfasts);
+      this.questionnaire = false;
     }, error => {
       console.log(error);
     });
