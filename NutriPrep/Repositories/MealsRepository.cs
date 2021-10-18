@@ -20,30 +20,32 @@ namespace NutriPrep.Repositories
         public List<Ushqimi> GetUshqimetMengjes(int mengjes, int nrMengjes)
         {
             var ushqimetB = new List<Ushqimi>();
-            var shujtaId = _context.Shujta.Where(x => x.ShujtaRandomInt == nrMengjes
-                && mengjes >= x.Kalori && mengjes < (x.Kalori + 19)).FirstOrDefault().ShujtaId;
-            ushqimetB = _context.Ushqimis.Where(x => x.ShujtaId == shujtaId).ToList();
-
+            var shujta = _context.Shujta.Where(x => x.ShujtaRandomInt == nrMengjes
+                && mengjes >= x.Kalori && mengjes < (x.Kalori + 19)).FirstOrDefault();
+            ushqimetB = _context.Ushqimis.Where(x => x.ShujtaId == shujta.ShujtaId).ToList();
+            foreach (var item in ushqimetB)
+            {
+                item.Shujta = shujta;
+            }
             return ushqimetB;
         }
 
         public List<Ushqimi> GetUshqimetDreke(int dreke, int nrDreke)
         {
             var ushqimetD = new List<Ushqimi>();
-            var shujtaId = _context.Shujta.Where(x => x.ShujtaRandomInt == nrDreke
+            var shujta = _context.Shujta.Where(x => x.ShujtaRandomInt == nrDreke
                 && dreke >= x.Kalori && dreke < (x.Kalori + 19)).FirstOrDefault();
 
-            var shujtaIdToUse = 0;
+            if(shujta == null)
+            {
+                shujta = _context.Shujta.Where(x => x.ShujtaRandomInt == nrDreke).OrderByDescending(x => x.Kalori).FirstOrDefault();
+            }
 
-            if(shujtaId != null)
+            ushqimetD = _context.Ushqimis.Where(x => x.ShujtaId == shujta.ShujtaId).ToList();
+            foreach (var item in ushqimetD)
             {
-                shujtaIdToUse = shujtaId.ShujtaId;
+                item.Shujta = shujta;
             }
-            else
-            {
-                shujtaIdToUse = _context.Shujta.Where(x => x.ShujtaRandomInt == nrDreke).OrderByDescending(x => x.Kalori).FirstOrDefault().ShujtaId;
-            }
-            ushqimetD = _context.Ushqimis.Where(x => x.ShujtaId == shujtaIdToUse).ToList();
 
             return ushqimetD;
         }
@@ -51,20 +53,21 @@ namespace NutriPrep.Repositories
         public List<Ushqimi> GetUshqimetDarke(int darke, int nrDarke)
         {
             var ushqimetD = new List<Ushqimi>();
-            var shujtaId = _context.Shujta.Where(x => x.ShujtaRandomInt == nrDarke
+            var shujta = _context.Shujta.Where(x => x.ShujtaRandomInt == nrDarke
                 && darke >= x.Kalori && darke < (x.Kalori + 19)).FirstOrDefault();
 
-            var shujtaIdToUse = 0;
 
-            if (shujtaId != null)
+            if (shujta == null)
             {
-                shujtaIdToUse = shujtaId.ShujtaId;
+                shujta = _context.Shujta.Where(x => x.ShujtaRandomInt == nrDarke).OrderByDescending(x => x.Kalori).FirstOrDefault();
             }
-            else
+
+            ushqimetD = _context.Ushqimis.Where(x => x.ShujtaId == shujta.ShujtaId).ToList();
+
+            foreach (var item in ushqimetD)
             {
-                shujtaIdToUse = _context.Shujta.Where(x => x.ShujtaRandomInt == nrDarke).OrderByDescending(x => x.Kalori).FirstOrDefault().ShujtaId;
+                item.Shujta = shujta;
             }
-            ushqimetD = _context.Ushqimis.Where(x => x.ShujtaId == shujtaIdToUse).ToList();
             return ushqimetD;
         }
 

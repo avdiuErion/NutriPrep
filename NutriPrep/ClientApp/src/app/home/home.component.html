@@ -124,14 +124,32 @@
       </div>
     </div>
 
-    <button type="button" (click)="onSubmit()">Submit</button>
+    <button type="button" (click)="onSubmit();">Submit</button>
   </form>
 </div>
 
 <div class="row" id="pdfTable" [class.hidden]="questionnaire">
   <div class="col-md-4" *ngFor="let item of uToReturn; index as i">
     <h6>Dita {{i+1}}:</h6>
-      <p *ngFor="let itemi of item" class="paragraph">{{itemi.emriUshqimit}}, {{itemi.sasiaGr}} gr</p>
+    <div>
+      <h6>Mëngjes</h6>
+      <ng-container *ngFor="let itemi of item" >
+        <p *ngIf="itemi.shujta.lloji == 'B         '" class="paragraph"> {{itemi.emriUshqimit}}, {{itemi.sasiaGr}} gr</p>
+      </ng-container>
+    </div>
+    <div>
+      <h6>Drekë</h6>
+      <ng-container *ngFor="let itemi of item" >
+        <p *ngIf="itemi.shujta.lloji == 'L         '" class="paragraph"> {{itemi.emriUshqimit}}, {{itemi.sasiaGr}} gr</p>
+      </ng-container>
+    </div>
+    <div *ngIf="hasDinner">
+      <h6>Darkë</h6>
+      <ng-container *ngFor="let itemi of item" >
+        <p *ngIf="itemi.shujta.lloji == 'D         '" class="paragraph"> {{itemi.emriUshqimit}}, {{itemi.sasiaGr}} gr</p>
+      </ng-container>
+    </div>
+
   </div>
   <!--<div id="pdfTable" *ngIf="!questionnaire" class="col-md-4">
     <h6>Dreke:</h6>

@@ -45,7 +45,7 @@ namespace NutriPrep.Services
            
             if (qellimiDietes == "HeqePeshe")
             {
-                rezultatiBRM = rezultatiBRM - Convert.ToInt32(payload.Sasia);
+                rezultatiBRM = rezultatiBRM - (Convert.ToInt32(payload.Sasia)*500);
                 var qellimiRez = Math.Floor(rezultatiBRM);
                 switch (Convert.ToInt32(payload.NrShujtave))
                 {

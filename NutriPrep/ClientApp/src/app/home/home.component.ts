@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit, AfterViewInit{
   ushqimet: any;
   node: any;
   pp: any;
+  th: Array<any>;
+    hasDinner: boolean = false;
   constructor(
     private generalService: GeneralService,
     private formBuilder: FormBuilder,
@@ -32,7 +34,6 @@ export class HomeComponent implements OnInit, AfterViewInit{
       this.pp = document.getElementsByClassName('paragraph');
       console.log(this.pp);
       this.node = document.createElement("P");
-      
     }
 
 
@@ -81,13 +82,13 @@ export class HomeComponent implements OnInit, AfterViewInit{
     this.generalService.GetPlan(this.form.value).subscribe(res => {
       console.log(this.form.value);
       this.uToReturn = res;
-      for (var i = 0; i < this.uToReturn.length; i++) {
-        this.ushqimet = this.uToReturn[i];
-        for (var j = 0; j < this.ushqimet.length - 1; j++) {
-          var u1 = this.ushqimet[j] as Breakfast;
-          var u2 = this.ushqimet[j + 1] as Breakfast;
-          if (u1.shujtaId != u2.shujtaId) {
-            document.appendChild < this.pp > (this.node);
+      this.ushqimet = this.uToReturn[0];
+      if (this.ushqimet.length > 7) {
+        for (var i = 0; i < this.ushqimet.length; i++) {
+          if (this.ushqimet[i].shujta.lloji == 'D         ') {
+            this.hasDinner = true;
+            console.log('broke');
+            break;
           }
         }
       }
@@ -117,13 +118,14 @@ export class HomeComponent implements OnInit, AfterViewInit{
 
     //doc.html(pdfTable.innerHTML);
 
-    var element = document.getElementById('pdfTable');
-      html2canvas(element).then((canvas) => {
+    //var element = document.getElementById('pdfTable');
+    const div = document.getElementById("pdfTable");
+    const options = { background: "white", height: div.clientHeight, width: div.clientWidth };
+    html2canvas(div, options).then((canvas) => {
+      let doc = new jsPDF("p", "mm", "a4");
       var imgData = canvas.toDataURL('image/png');
 
-      var doc = new jspdf();
-
-      doc.addImage(imgData, 0, 0, 208, 500);
+      doc.addImage(imgData, 0, 0, 250, 250);
       //doc.save('tableToPdf.pdf');
         /*doc.output('dataurlnewwindow');*/
         var blob = doc.output("blob");
