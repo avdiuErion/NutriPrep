@@ -27,7 +27,6 @@ namespace NutriPrep.Services
         {
             var rezultatiBRMMePerkushtim = this.CalculateBRM(payload.Gjinia, payload.Mosha, payload.Gjatesia, payload.Pesha, payload.Aktiviteti, payload.Perkushtimi);
             return this.getShujtat(payload, rezultatiBRMMePerkushtim);
-            //return _context.Ushqimis.Where(x => x.ShujtaId == Convert.ToInt32(payload.CheckArray[0])).ToList();
         }
 
         private List<List<Ushqimi>> getShujtat(PayLoadDTO payload, double rezultatiBRM)
@@ -42,10 +41,10 @@ namespace NutriPrep.Services
             var darka = 0;
             var darka2 = 0;
             int count = 0;
-           
+
             if (qellimiDietes == "HeqePeshe")
             {
-                rezultatiBRM = rezultatiBRM - (Convert.ToInt32(payload.Sasia)*500);
+                rezultatiBRM = rezultatiBRM - (Convert.ToInt32(payload.Sasia) * 500);
                 var qellimiRez = Math.Floor(rezultatiBRM);
                 switch (Convert.ToInt32(payload.NrShujtave))
                 {
@@ -54,79 +53,28 @@ namespace NutriPrep.Services
                         mengjes = (int)Math.Floor(qellimiRez * 0.4);
                         dreka = (int)Math.Floor(qellimiRez * 0.6);
 
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 1)
+                        while (count < listLength)
                         {
-                            while (count < 7)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
+                            listToReturn[count] = new List<Ushqimi>();
+                            listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka));
 
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 2)
-                        {
-                            while (count < 14)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 3)
-                        {
-                            while (count < 30)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-
-                                count++;
-                            }
+                            count++;
                         }
                         break;
                     case 2:
                         mengjes = (int)Math.Floor(qellimiRez * 0.3);
                         dreka = (int)Math.Floor(qellimiRez * 0.4);
                         darka = (int)Math.Floor(qellimiRez * 0.3);
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 1)
-                        {
-                            while (count < 7)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
 
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 2)
+                        while (count < listLength)
                         {
-                            while (count < 14)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
+                            listToReturn[count] = new List<Ushqimi>();
+                            listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka));
+                            listToReturn[count].AddRange(getShujtaDarke(darka));
 
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 3)
-                        {
-                            while (count < 30)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-
-                                count++;
-                            }
+                            count++;
                         }
                         break;
                     case 3:
@@ -134,44 +82,15 @@ namespace NutriPrep.Services
                         dreka = (int)Math.Floor(qellimiRez * 0.3);
                         dreka2 = (int)Math.Floor(qellimiRez * 0.3);
                         darka = (int)Math.Floor(qellimiRez * 0.2);
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 1)
+                        while (count < listLength)
                         {
-                            while (count < 7)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
+                            listToReturn[count] = new List<Ushqimi>();
+                            listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                            listToReturn[count].AddRange(getShujtaDarke(darka));
 
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 2)
-                        {
-                            while (count < 14)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 3)
-                        {
-                            while (count < 30)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-
-                                count++;
-                            }
+                            count++;
                         }
                         break;
                 }
@@ -187,41 +106,14 @@ namespace NutriPrep.Services
                         mengjes = (int)Math.Floor(qellimiRezz * 0.3);
                         dreka = (int)Math.Floor(qellimiRezz * 0.4);
                         darka = (int)Math.Floor(qellimiRezz * 0.3);
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 1)
+                        while (count < listLength)
                         {
-                            while (count < 7)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
+                            listToReturn[count] = new List<Ushqimi>();
+                            listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka));
+                            listToReturn[count].AddRange(getShujtaDarke(darka));
 
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 2)
-                        {
-                            while (count < 14)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 3)
-                        {
-                            while (count < 30)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-
-                                count++;
-                            }
+                            count++;
                         }
                         break;
                     case 2:
@@ -229,44 +121,15 @@ namespace NutriPrep.Services
                         dreka = (int)Math.Floor(qellimiRezz * 0.3);
                         dreka2 = (int)Math.Floor(qellimiRezz * 0.3);
                         darka = (int)Math.Floor(qellimiRezz * 0.2);
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 1)
+                        while (count < listLength)
                         {
-                            while (count < 7)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
+                            listToReturn[count] = new List<Ushqimi>();
+                            listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                            listToReturn[count].AddRange(getShujtaDarke(darka));
 
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 2)
-                        {
-                            while (count < 14)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 3)
-                        {
-                            while (count < 30)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-
-                                count++;
-                            }
+                            count++;
                         }
                         break;
                     case 3:
@@ -275,55 +138,20 @@ namespace NutriPrep.Services
                         dreka2 = (int)Math.Floor(qellimiRezz * 0.2);
                         darka = (int)Math.Floor(qellimiRezz * 0.2);
                         darka2 = (int)Math.Floor(qellimiRezz * 0.2);
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 1)
+                        while (count < listLength)
                         {
-                            while (count < 7)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka2));
+                            listToReturn[count] = new List<Ushqimi>();
+                            listToReturn[count].AddRange(getShujtaMengjes(mengjes));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka));
+                            listToReturn[count].AddRange(getShujtaDreke(dreka2));
+                            listToReturn[count].AddRange(getShujtaDarke(darka));
+                            listToReturn[count].AddRange(getShujtaDarke(darka2));
 
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 2)
-                        {
-                            while (count < 14)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka2));
-
-                                count++;
-                            }
-                        }
-                        if (Convert.ToInt32(payload.Kohezgjatja) == 3)
-                        {
-                            while (count < 30)
-                            {
-                                listToReturn[count] = new List<Ushqimi>();
-                                listToReturn[count].AddRange(getShujtaMengjes(mengjes));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka));
-                                listToReturn[count].AddRange(getShujtaDreke(dreka2));
-                                listToReturn[count].AddRange(getShujtaDarke(darka));
-                                listToReturn[count].AddRange(getShujtaDarke(darka2));
-
-                                count++;
-                            }
+                            count++;
                         }
                         break;
                 }
             }
-
-            //listToReturn[0] = breakfastsToReturn;
-            //listToReturn[1] = lunchesToReturn;
-            //listToReturn[2] = dinnersToReturn;
 
             return listToReturn;
         }
